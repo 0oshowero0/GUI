@@ -108,3 +108,14 @@ all_city_gpd = all_city_gpd.to_crs(epsg=4326)
 all_city_gpd_area_select = all_city_gpd.loc[all_city_gpd.Area<20000**2].reset_index(drop=True)
 all_city_gpd_area_select.to_file('city_boundary.geojson', driver='GeoJSON')  # 可用QGIS打开并选择合适的边界
 all_city_gpd_area_select.to_parquet('city_boundary.parquet') # parquet格式适合大量数据，可以快速读取
+
+
+# 后处理:Debug
+all_city_gpd_area_select = gpd.read_parquet('city_boundary.parquet')
+all_city_gpd_area_select.loc[ all_city_gpd_area_select['CountryName'].isna()]
+all_city_gpd_area_select.loc[(all_city_gpd_area_select['CountryCode']=='VEN'),'CountryName'] = 'Venezuela'
+all_city_gpd_area_select.loc[(all_city_gpd_area_select['CountryCode']=='SSD'),'CountryName'] = 'South Sudan'
+all_city_gpd_area_select.loc[(all_city_gpd_area_select['CountryCode']=='YEM'),'CountryName'] = 'Yemen'
+
+all_city_gpd_area_select.to_file('city_boundary.geojson', driver='GeoJSON')  # 可用QGIS打开并选择合适的边界
+all_city_gpd_area_select.to_parquet('city_boundary.parquet') # parquet格式适合大量数据，可以快速读取
