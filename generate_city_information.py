@@ -121,7 +121,7 @@ all_city_gpd_area_select.loc[(all_city_gpd_area_select['CountryCode']=='YEM'),'C
 # 生成最终数据集
 all_city_gpd_area_select['CityCode'] = all_city_gpd_area_select['ID']
 all_city_gpd_area_select = all_city_gpd_area_select[['CityCode','CityName','CountryCode','CountryName','Region','CityStatus','Population',
-                                                        'PopulationClass','GDP','PerCapitaGDP','Area','geometry']]
+                                                        'PopulationClass','GDP','PerCapitaGDP','IncomeGroup','Area','geometry']]
 
 
 
